@@ -40,7 +40,7 @@ class NotAbc(metaclass=DynamicMethod):
         print(x * 4)
 
 
-def main():
+def main1():
     a = AbcTest()
     a.mc(3)
     a.ma()
@@ -76,7 +76,7 @@ class Operation(metaclass=LoginDecorator):
         print("delete %s" % str(x))
 
 
-def main1():
+def main2():
     op = Operation()
     op.delete('test')  # login check logic here  delete test
 
@@ -87,6 +87,15 @@ def main1():
 
 
 def monkey_patch(name, bases, dct):
+    """
+    name : PatchA
+    bases: <class '__main__.A'>
+    dct： {
+        "__module__":"__main__",
+        "__qualanme__":"PathcA",
+        "patcha_method":<function PatchA.patch_method at 0x00000002385724F268>
+    }
+    """
     assert len(bases) == 1
     base = bases[0]
     for name, value in dct.items():
@@ -106,7 +115,7 @@ class PatchA(A, metaclass=monkey_patch):
         print('this is a method patched for class A')
 
 
-def main2():
+def main3():
     pa = PatchA()
     pa.patcha_method()
     pa.a()
@@ -115,4 +124,4 @@ def main2():
 
 
 if __name__ == '__main__':
-    main2()
+    main3()
