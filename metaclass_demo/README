@@ -1,2 +1,12 @@
+python中一切皆对象，class在VM中也是一个对象，需要区分class对象和class实例对象
+class instance 指某个class的instance,这个instance的ob_type指向某个class object
+
+metaclass 的确定次序：
+1. 定义类时是否有__metaclass__这个field
+2. baseclasses[0]中是否有定义__metaclass__这个field, 这个查找步骤会一直向父类baseclasses[0]递归
+3. global名字空间中是否有一个__metaclass__这个field
+4. 实在都没有了，__metaclass__就用PyClass_Type
+
 什么是元类：
     在面对对象的编程中，元类是一个实例为类的类，正如普通类定义某些对象的行为一样，元类定义某些类及其实例的行为
+
